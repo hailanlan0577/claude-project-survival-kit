@@ -89,54 +89,89 @@ Claude 跑 8 步 checklist：
 
 ---
 
-## 🚀 5 分钟：给新项目套用
+## 🚀 怎么用（三种姿势，从懒到勤）
 
-### 第 1 步：克隆本仓库到本地
+### 🦥 姿势 1：最懒 —— 装一个 `/setup-kit` skill，以后一个斜杠搞定
 
-```bash
-cd ~
-git clone https://github.com/hailanlan0577/claude-project-survival-kit.git
+**只需装一次**（任何 Claude 窗口里跑）：
+
+```
+帮我把 https://github.com/hailanlan0577/claude-project-survival-kit/blob/main/skills-installer.md
+的 setup-kit skill 安装到 ~/.claude/skills/setup-kit/
 ```
 
-### 第 2 步：复制 templates 到你的项目根目录
+或者手动：
+```bash
+# 1. 克隆仓库
+git clone https://github.com/hailanlan0577/claude-project-survival-kit.git ~/claude-survival-kit
+
+# 2. 装 setup-kit skill（一次性，装一次全局可用）
+# 看 skills-installer.md 里的说明
+```
+
+**以后每个新项目**，在项目目录下的 Claude 窗口打：
+```
+/setup-kit
+```
+
+Claude 会**问你 10 个问题**（项目名 / 路径 / 技术栈 / 部署目标 / 密钥等），然后自动帮你：
+- 复制 7 件套到项目根 + 填好占位符
+- 装 2 个项目专属 skill（`/<项目缩写>-onboard` 和 `-offboard`）
+- 建 GitHub repo + 首次 commit
+- 把密钥拆成三位一体（config.yaml / example / credentials.md）
+
+30 分钟不到，项目就有了完整救命套件。
+
+---
+
+### 🤖 姿势 2：中等 —— 给 Claude 贴一段口令
+
+如果不想装 skill，每次新项目让 Claude 帮你：
+
+```
+帮我按 https://github.com/hailanlan0577/claude-project-survival-kit 的模板
+给这个项目建一套救命套件。先问我关键信息，再动手。
+```
+
+粘贴这段，Claude 会做同样的事。缺点是每次要记住或粘贴这段。
+
+---
+
+### 🛠️ 姿势 3：手动 —— 自己照模板填
+
+适合想完全掌控每一步的人。
 
 ```bash
+# 1. 克隆仓库
+git clone https://github.com/hailanlan0577/claude-project-survival-kit.git ~/claude-survival-kit
+
+# 2. 复制模板到你的项目
 cd /path/to/your/project
-cp ~/claude-project-survival-kit/templates/*.tpl .
-cp ~/claude-project-survival-kit/templates/scripts/*.tpl scripts/
-# 改名（去掉 .tpl）
+cp ~/claude-survival-kit/templates/*.tpl .
+cp ~/claude-survival-kit/templates/scripts/*.tpl scripts/
+
+# 3. 去掉 .tpl 后缀
 for f in *.md.tpl; do mv "$f" "${f%.tpl}"; done
+mv .gitignore.tpl .gitignore
 mv scripts/deploy.sh.tpl scripts/deploy.sh
 chmod +x scripts/deploy.sh
-```
 
-### 第 3 步：对 Claude 说
+# 4. 手动 Edit 每个文件，把 <占位符> 换成真实内容
+# （或让 Claude 一步步帮你）
 
-> "按照 ~/claude-project-survival-kit/ 里的模板，把 `<占位符>` 都填成我这个项目的真实信息。项目是做什么、源码在哪、GitHub 地址、部署目标、关键服务端点、密钥在哪。你填完给我看，我确认后再推 git。"
-
-Claude 会读模板、问你关键信息、自动填充。
-
-### 第 4 步：复制 skill 到全局
-
-```bash
-# 替换 <proj> 为你项目的缩写（比如 lbc、ccr、myapp）
-PROJ=<proj>
+# 5. 装 2 个 skill（PROJ 换成你的项目缩写）
+PROJ=yourapp
 mkdir -p ~/.claude/skills/${PROJ}-onboard ~/.claude/skills/${PROJ}-offboard
-cp ~/claude-project-survival-kit/skills/proj-onboard/SKILL.md \
-   ~/.claude/skills/${PROJ}-onboard/SKILL.md
-cp ~/claude-project-survival-kit/skills/proj-offboard/SKILL.md \
-   ~/.claude/skills/${PROJ}-offboard/SKILL.md
-# 改 skill 内容里的 <proj> 和项目路径
+cp ~/claude-survival-kit/skills/proj-onboard/SKILL.md ~/.claude/skills/${PROJ}-onboard/
+cp ~/claude-survival-kit/skills/proj-offboard/SKILL.md ~/.claude/skills/${PROJ}-offboard/
+# 编辑两个 SKILL.md 把 <PROJ> 和 <项目名> 换掉
+
+# 6. git init + push（按 docs/5-git-起步-6-步.md）
 ```
 
-或者让 Claude 帮你：
-> "把 `~/claude-project-survival-kit/skills/` 里的两个 skill 复制到 `~/.claude/skills/`，项目缩写用 `<proj>`，项目路径用 `<path>`。"
+---
 
-### 第 5 步：首次 commit
-
-按 Claude 填好的 `.gitignore` 扫一遍敏感文件，第一次 commit + push 到 GitHub private repo。
-
-**✅ 完成。以后新开窗口打 `/<proj>-onboard` 即可接手。**
+**不管用哪种姿势，结果都是**：项目根有 7 件套 + 全局有 2 个 skill。以后新开窗口打 `/<项目缩写>-onboard` 或说"继续 <项目名>"就能接上。
 
 ---
 
