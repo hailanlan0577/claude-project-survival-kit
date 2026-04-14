@@ -6,6 +6,50 @@
 
 ---
 
+## ⚡ 命令速查（记住这 3 个你就够用了）
+
+| 场景 | 命令 | 备注 |
+|------|------|------|
+| 🆕 **第一次**给新项目建救命套件 | `/setup-kit` | 全局通用，装一次各项目都用 |
+| 🪄 **新窗口**继续做某项目 | `/<项目缩写>-onboard` | 每个项目缩写不一样 |
+| 🛑 **会话结束**前存档 | `/<项目缩写>-offboard` | 同上 |
+
+### 🔮 举例
+
+假设你有项目 `luxury-bag-copilot`，缩写定为 `lbc`：
+
+| 动作 | 命令 |
+|------|------|
+| 明天开新窗口继续做它 | `/lbc-onboard` |
+| 今晚下班前存档 | `/lbc-offboard` |
+
+**新项目的第一次**：进项目目录，打 `/setup-kit`，Claude 会问你起英文缩写（比如 `blog` / `ccr`），然后帮你装专属的 `-onboard` 和 `-offboard`。
+
+### 📝 起缩写的小建议
+
+- **短**（2-4 个字母最好）
+- **好记**（项目关键词首字母）
+- **唯一**（别跟已有 skill 撞车）
+
+| 项目名示例 | 推荐缩写 |
+|-----------|---------|
+| luxury-bag-copilot | `lbc` |
+| chinese-chess-react | `ccr` |
+| luxury-bag-inventory | `lbi` |
+| my-blog | `blog` 或 `mb` |
+| dev-tools-dashboard | `dtd` |
+
+### 🧠 记不住怎么办？
+
+- **自然语言替代**（Claude 会识别）：
+  - 代替 `/setup-kit` → 说 "给这个新项目建救命套件"
+  - 代替 `/lbc-onboard` → 说 "继续 luxury-bag 项目"
+  - 代替 `/lbc-offboard` → 说 "下班" / "存档"
+- **查找命令**：看 Claude Code 窗口左下角的 skills 列表
+- **这份 README**：https://github.com/hailanlan0577/claude-project-survival-kit
+
+---
+
 ## 🎯 这是什么？
 
 你和 Claude 一起做了个项目。**三天后再聊**，新的 Claude 窗口一脸懵：
