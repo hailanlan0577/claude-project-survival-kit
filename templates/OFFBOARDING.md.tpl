@@ -99,7 +99,21 @@ content: "<项目名> YYYY-MM-DD 进展：<今天关键结果>。下次第一件
 
 这条记忆**比 STATUS.md 更精简**，让下个 Claude 搜"<项目名> 最新"就能命中。
 
-### ⑧ 最后一步：给下个 Claude 留便条
+### ⑧ Obsidian 沉淀（可选，仅当今天有实质讨论时跑）
+
+如果今天有**架构决策 / 紧急抢救事件 / 头脑风暴 / 复盘 / 深度学习** 10 轮以上的实质讨论，跑：
+
+```
+/save-to-obsidian
+```
+
+这个 skill 会自动判断文档类型（ADR / Design Doc / Brainstorm / Retro / Learning），按对应模板填好写进 Obsidian vault。跟第 ⑦ 步的记忆系统互补：记忆是索引（几十字），Obsidian 文档是正文（完整内容）。
+
+**判断阈值：**
+- ✅ 适合：架构决策、14 小时级抢救事件、三方案比较、复盘类讨论
+- ❌ 跳过：日常 commit、小 bug 修复、"帮我跑下命令"这种操作请求
+
+### ⑨ 最后一步：给下个 Claude 留便条
 
 在 `STATUS.md` 末尾加/更新一节（覆盖上次的便条）：
 
@@ -118,7 +132,7 @@ content: "<项目名> YYYY-MM-DD 进展：<今天关键结果>。下次第一件
 
 ## 最后：逐条报告给用户
 
-按 1-8 步逐条报告**做了什么**：
+按 1-9 步逐条报告**做了什么**：
 
 ```
 ✅ 1. STATUS.md 已更新：追加 YYYY-MM-DD 做了 X/Y/Z
@@ -128,7 +142,8 @@ content: "<项目名> YYYY-MM-DD 进展：<今天关键结果>。下次第一件
 ✅ 5. 密钥已同步（或：无变化，跳过）
 ✅ 6. CLAUDE.md 代码地图已更新（或：无大变动，跳过）
 ✅ 7. 记忆已存 [ID: xxxxxxxx]
-✅ 8. STATUS.md 末尾便条已留："下次第一件事做 X"
+✅ 8. Obsidian 文档已沉淀：[文档名]（或：无值得沉淀的讨论，跳过）
+✅ 9. STATUS.md 末尾便条已留："下次第一件事做 X"
 
 下次新开窗口，贴开场口令或打 /<PROJ>-onboard 就能无缝接上。
 ```
@@ -163,7 +178,7 @@ Claude 读 ONBOARDING.md → 汇报状态
    ↓
 用户贴 OFFBOARDING 口令
    ↓
-Claude 跑 checklist 8 步
+Claude 跑 checklist 9 步
    ↓
 STATUS.md / ONBOARDING.md / 记忆系统都更新
    ↓

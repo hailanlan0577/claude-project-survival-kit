@@ -4,6 +4,20 @@
 
 ## [Unreleased]
 
+## [0.2.1] — 2026-04-15
+
+**主题：织补 dogfooding gap — offboard 纳入 Obsidian 沉淀**
+
+### Changed 变更
+- `skills/proj-offboard/SKILL.md` — checklist 从 8 步扩到 9 步，新增"第 8 步 Obsidian 沉淀（可选）"
+- `templates/OFFBOARDING.md.tpl` — 同步扩 9 步
+- 新的第 8 步调用 v0.2.0 引入的 `/save-to-obsidian` skill，仅当**有实质讨论**时触发（架构决策 / 抢救事件 / 头脑风暴 / 复盘 / 深度学习 10+ 轮）
+- 跟第 7 步的记忆系统互补：记忆是索引（几十字），Obsidian 文档是正文（完整内容）
+
+### Meta
+- 识别出 v0.2.0 的一个隐性债务：新增 Obsidian 工具链但没织进 offboard 工作流
+- 本次 patch 只改了 kit 侧；已生成的项目 offboard（如 `/lbc-offboard`）需要单独同步（已同步 lbc）
+
 ## [0.2.0] — 2026-04-15
 
 **主题：Obsidian 工具链 + 可导航 README**
@@ -52,6 +66,7 @@
 - `/proj-offboard` skill — 每个项目生成专属的 `/<缩写>-offboard`（8 步收场 checklist）
 - `README.md` + `skills-installer.md` — 使用说明 + 手动安装指南
 
-[Unreleased]: https://github.com/hailanlan0577/claude-project-survival-kit/compare/v0.2.0...HEAD
+[Unreleased]: https://github.com/hailanlan0577/claude-project-survival-kit/compare/v0.2.1...HEAD
+[0.2.1]: https://github.com/hailanlan0577/claude-project-survival-kit/compare/v0.2.0...v0.2.1
 [0.2.0]: https://github.com/hailanlan0577/claude-project-survival-kit/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/hailanlan0577/claude-project-survival-kit/releases/tag/v0.1.0

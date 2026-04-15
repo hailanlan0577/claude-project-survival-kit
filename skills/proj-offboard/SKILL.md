@@ -1,6 +1,6 @@
 ---
 name: <PROJ>-offboard
-description: <项目名> 项目会话结束收尾。读 OFFBOARDING.md 按 8 步 checklist 执行：更新 STATUS / 记新坑 / git commit+push / 部署 / 密钥同步 / 代码地图 / 记忆存进度 / 留便条。触发词：<项目名> 下班 / <项目名> 存档 / 窗口快满了 / 写交接 / 今天就到这 / <PROJ>-offboard。
+description: <项目名> 项目会话结束收尾。读 OFFBOARDING.md 按 9 步 checklist 执行：更新 STATUS / 记新坑 / git commit+push / 部署 / 密钥同步 / 代码地图 / 记忆存进度 / Obsidian 沉淀（可选）/ 留便条。触发词：<项目名> 下班 / <项目名> 存档 / 窗口快满了 / 写交接 / 今天就到这 / <PROJ>-offboard。
 user-invocable: true
 ---
 
@@ -38,7 +38,7 @@ user-invocable: true
 Read tool: <绝对路径>/OFFBOARDING.md
 ```
 
-完整的 8 步 checklist 在这个文件里。严格按顺序执行。
+完整的 9 步 checklist 在这个文件里。严格按顺序执行。
 
 ### 第 1 步：更新 STATUS.md "今天做了什么"
 
@@ -97,7 +97,21 @@ tags: <项目名>,progress,YYYY-MM-DD
 content: "<项目名> YYYY-MM-DD 进展：<今天关键结果>。下次第一件事：<X>。当前阻塞：<Y 或 无>。"
 ```
 
-### 第 8 步：给下个 Claude 留便条
+### 第 8 步：Obsidian 沉淀（可选，仅当今天有实质讨论时跑）
+
+如果今天有**架构决策 / 紧急抢救事件 / 头脑风暴 / 复盘 / 深度学习** 10 轮以上的实质讨论，跑：
+
+```
+/save-to-obsidian
+```
+
+这个 skill 会自动判断文档类型（ADR / Design Doc / Brainstorm / Retro / Learning），按对应模板填好写进 Obsidian vault。跟第 7 步的记忆系统互补：记忆是索引（几十字），Obsidian 文档是正文（完整内容）。
+
+**判断阈值：**
+- ✅ 适合：架构决策、14 小时级抢救事件、三方案比较、复盘类讨论
+- ❌ 跳过：日常 commit、小 bug 修复、"帮我跑下命令"这种操作请求
+
+### 第 9 步：给下个 Claude 留便条
 
 在 `STATUS.md` 末尾追加/更新：
 
@@ -117,7 +131,8 @@ content: "<项目名> YYYY-MM-DD 进展：<今天关键结果>。下次第一件
 ✅ 5. 密钥已同步（或：无变化，跳过）
 ✅ 6. CLAUDE.md 代码地图已更新（或：无大变动，跳过）
 ✅ 7. 记忆已存 [ID: xxxxxxxx]
-✅ 8. STATUS.md 末尾便条已留："下次第一件事做 X"
+✅ 8. Obsidian 文档已沉淀：[文档名]（或：无值得沉淀的讨论，跳过）
+✅ 9. STATUS.md 末尾便条已留："下次第一件事做 X"
 
 下次新开窗口，贴开场口令或打 /<PROJ>-onboard 就能无缝接上。
 ```
