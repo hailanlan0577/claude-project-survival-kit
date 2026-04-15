@@ -1,0 +1,56 @@
+# ============================================
+# 项目救命手册 .gitignore
+# 讽刺的是这个项目是教别人 .gitignore 的,自己以前却没有
+# ============================================
+
+# === 操作系统垃圾文件 ===
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# === 编辑器 / IDE ===
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.settings/
+
+# === Claude Code 本地产物 ===
+.claude/settings.local.json
+.claude/cache/
+
+# === oh-my-claudecode 本地状态 ===
+.omc/
+
+# === graphify 输出目录（可重建，不该入库） ===
+graphify-out/
+
+# === Python 环境（如果项目里有脚本用到） ===
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+env/
+*.egg-info/
+
+# === 密钥和环境变量（绝对不能入库！救命手册第 3 章的核心） ===
+.env
+.env.*
+!.env.example
+credentials.md
+secrets/
+*.key
+*.pem
+
+# === 日志 / 临时文件 ===
+*.log
+tmp/
+temp/
