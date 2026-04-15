@@ -121,17 +121,22 @@ bash scripts/deploy.sh --restart
 
 按顺序：
 
-1. **扫一下 Obsidian** 最近相关文档（v0.2.2 新增）：
+1. **读项目图谱报告**（如果新鲜）（v0.3.0 新增）：
+   - 检查 `graphify-out/GRAPH_REPORT.md` 是否存在
+   - 若存在且修改时间 < 30 天：读 God Nodes / Communities / Surprising Connections 三节，塞进第 3 步汇报
+   - 若 ≥ 30 天：不读正文，汇报时提示"图谱过期 N 天，要不要跑 /proj-graphify 重建？"
+   - 若不存在：跳过，汇报里提一句"暂无项目图谱，想看结构可以跑 /proj-graphify"
+2. **扫一下 Obsidian** 最近相关文档（v0.2.2 新增）：
    - 用 `mcp__obsidian__obsidian_simple_search` 搜本项目 tag
    - 过滤 frontmatter `tags:` 包含该 tag 的文档，按修改时间降序取前 **3 个**
    - 读标题 + frontmatter + 第一段
    - 无匹配就跳过
-2. **用中文**总结项目状态（3-5 句话），**如果第 1 步找到了相关 Obsidian 文档就一并报**
-3. 问用户：要继续干嘛？建议的下一步：
+3. **用中文**总结项目状态（3-5 句话），**如果第 1/2 步找到了相关资料就一并报**
+4. 问用户：要继续干嘛？建议的下一步：
    - 决定当前阻塞的修复路径（A/B/C）
    - 或者读某份 Obsidian 文档的细节
    - 或者其他工作选项
-4. **等用户回复再动手**，不要自己决定就开干
+5. **等用户回复再动手**，不要自己决定就开干
 
 ---
 

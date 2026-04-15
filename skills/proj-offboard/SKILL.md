@@ -144,8 +144,9 @@ content: "<项目名> YYYY-MM-DD 进展：<今天关键结果>。下次第一件
 - ❌ 不要用 `git add .`（容易误提敏感文件）
 - ❌ 不要 `git push --force`（除非密钥紧急清理，见 RUNBOOK § 10.9）
 
-## 相关文档
+## 相关文档与 skill
 
 - 仓库根：`OFFBOARDING.md`（权威 checklist）
-- 配对 skill：`/<PROJ>-onboard`
+- 配对 skill：`/<PROJ>-onboard`（新会话开场）
+- **结构体检 skill（v0.3.0 新增）**：`/proj-graphify`——本次改了大量文件 / 架构 / 新加模块时，收尾后或发版前跑一次，看有没有结构债
 - 密钥表：`~/.claude/projects/*/memory/credentials.md`

@@ -42,7 +42,28 @@ Read tool: <绝对路径>/ONBOARDING.md
 - 文档读取优先顺序
 - 上一次会话踩的坑
 
-### 第 2 步：扫 Obsidian 最近相关文档（v0.2.2 新增）
+### 第 2 步：读项目图谱报告（如果新鲜）（v0.3.0 新增）
+
+如果 `<绝对路径>/graphify-out/GRAPH_REPORT.md` 存在，检查它的修改时间：
+
+```bash
+REPORT="<绝对路径>/graphify-out/GRAPH_REPORT.md"
+if [ -f "$REPORT" ]; then
+  age_days=$(( ($(date +%s) - $(stat -f %m "$REPORT")) / 86400 ))
+  if [ "$age_days" -lt 30 ]; then
+    echo "读图谱（$age_days 天前跑的）"
+    # 读它，把 God Nodes / Communities / Surprising Connections 三节塞进汇报
+  else
+    echo "图谱过期 $age_days 天，建议用户跑 /proj-graphify 重建"
+  fi
+fi
+```
+
+- **< 30 天**：读，把项目核心抽象（10 个 God Node）+ 社区结构（Communities 小节）纳入第 4 步汇报
+- **≥ 30 天**：不读正文（过期概念可能误导），但在汇报里提示"图谱 N 天前跑的，要不要重跑一次？"
+- **文件不存在**：跳过，汇报里提一句"暂无项目图谱，想看结构可以跑 /proj-graphify"
+
+### 第 3 步：扫 Obsidian 最近相关文档（v0.2.2 新增）
 
 上次会话的 `/save-to-obsidian` 可能在 Obsidian vault 写过本项目的 ADR / Design Doc / Retro / Brainstorm / Learning。**不读就会漏掉最新决策**（STATUS.md 写不下的细节都在这些文档里）。
 
@@ -60,11 +81,11 @@ find "$VAULT" -name "*.md" -exec sh -c \
   | sort -rn | head -3 | awk '{print $2}'
 ```
 
-**跳过条件：** 扫不到任何 tag 匹配文档 → 跳过本步，直接第 3 步。
+**跳过条件：** 扫不到任何 tag 匹配文档 → 跳过本步，直接第 4 步。
 
-### 第 3 步：用中文汇报状态（3-5 句话）
+### 第 4 步：用中文汇报状态（3-5 句话）
 
-按以下结构（**有第 2 步的 Obsidian 结果就加一段**）：
+按以下结构（**第 2 步图谱报告 + 第 3 步 Obsidian 结果都纳入**）：
 
 > 好的，我来继续 <项目名> 项目。简单汇报一下现状：
 >
@@ -74,6 +95,10 @@ find "$VAULT" -name "*.md" -exec sh -c \
 >
 > **下一步候选**：<列 A/B/C 或用户上次留的"下次第一件事">
 >
+> **（可选）项目地图**（图谱报告 N 天前跑的）：
+> - 核心抽象：<3 个 God Node>
+> - 社区结构：<X 个社区，最弱 cohesion <Y>>
+>
 > **（可选）Obsidian 最近相关文档** — 找到 N 份（按修改时间倒序）：
 > 1. `<标题 1>`（<日期>）— <frontmatter 摘要>
 > 2. `<标题 2>`...
@@ -82,11 +107,11 @@ find "$VAULT" -name "*.md" -exec sh -c \
 >
 > 你想继续干哪件事？
 
-### 第 4 步：等用户回复再动手
+### 第 5 步：等用户回复再动手
 
 **绝对不要**自己决定走哪条路径。问用户之后**等他明确指令**再开始。
 
-### 第 5 步：如果 `STATUS.md` 末尾有"🎯 下次进来第一件事"
+### 第 6 步：如果 `STATUS.md` 末尾有"🎯 下次进来第一件事"
 
 那是**上个 Claude 留给你的便条**，优先参考。在汇报里提一句：
 

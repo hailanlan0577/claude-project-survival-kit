@@ -184,3 +184,12 @@ STATUS.md / ONBOARDING.md / 记忆系统都更新
    ↓
 下次开新窗口 → 贴 ONBOARDING 口令 → 无缝接上
 ```
+
+---
+
+## 🗺️ 配套体检 skill（v0.3.0）
+
+- **`/proj-graphify`** — 给项目做结构体检，输出知识图谱（God Nodes / Communities / Surprising Connections）
+- **何时跑**：发 MINOR / MAJOR 版本前、大重构后、每季度一次
+- **不用跑**：每次 offboard（烧 token 没价值，小改动无信息增量）
+- 跑完后，下次 `/<PROJ>-onboard` 会**自动读** `graphify-out/GRAPH_REPORT.md`（<30 天的会被当项目地图用）

@@ -4,6 +4,35 @@
 
 ## [Unreleased]
 
+## [0.3.0] — 2026-04-15
+
+**主题：接入 graphify 做项目结构体检 — 新 skill `/proj-graphify` + onboard 自动读图谱报告**
+
+### Added 新增
+- **新 skill `skills/proj-graphify/SKILL.md`** — 给当前项目做结构体检
+  - 自动定位项目根（git rev-parse / 包含 CLAUDE.md 的目录）
+  - 输出到 `~/graphify-runs/<project>/` 而非项目内（不污染 git diff）
+  - 用软链回项目根的 `graphify-out/`，让 onboard 能读
+  - 内置使用时机指南（推荐：发版前 / 大重构后 / 季度；不推荐：每次 offboard）
+- `skills/proj-onboard/SKILL.md` 新增第 2 步：读项目图谱报告（< 30 天）
+- `templates/ONBOARDING.md.tpl` 同步加图谱读取步骤
+- `skills/proj-offboard/SKILL.md` 和 `templates/OFFBOARDING.md.tpl` 加 `/proj-graphify` 引用（仅作 related skill 提示，不进 checklist）
+
+### Changed 变更
+- proj-onboard 步骤从 5 步扩到 6 步（第 2 步新加图谱读取）
+- 汇报模板加可选段落"项目地图（图谱报告 N 天前跑的）"，把 God Nodes / Communities 纳入
+
+### Fixed 修复
+- `templates/OFFBOARDING.md.tpl` 末尾"配套体检 skill"段落明确"不要每次 offboard 都跑"——避免误把它当成日常工作流强制项
+
+### Meta
+- 设计哲学：graphify 是**派生索引**（地图），不是**权威存储**（档案柜）
+  - 输出放 `~/graphify-runs/` 而非项目内：可重建产物不污染源码
+  - onboard 读软链：享受 30 天内的图谱地图，不用每次重跑
+  - 写进 offboard 配套引用而非 checklist：避免把"地图"当"档案"过度使用
+- v0.2.x 是档案柜思路（offboard 写 → onboard 读）；v0.3.0 加上"地图"层
+- 这是从 PATCH(v0.2.2) 升到 MINOR(v0.3.0)：新功能 `/proj-graphify` + onboard 行为变更
+
 ## [0.2.2] — 2026-04-15
 
 **主题：闭合 offboard → onboard 循环 — onboard 自动读最近 Obsidian 文档**
@@ -87,7 +116,8 @@
 - `/proj-offboard` skill — 每个项目生成专属的 `/<缩写>-offboard`（8 步收场 checklist）
 - `README.md` + `skills-installer.md` — 使用说明 + 手动安装指南
 
-[Unreleased]: https://github.com/hailanlan0577/claude-project-survival-kit/compare/v0.2.2...HEAD
+[Unreleased]: https://github.com/hailanlan0577/claude-project-survival-kit/compare/v0.3.0...HEAD
+[0.3.0]: https://github.com/hailanlan0577/claude-project-survival-kit/compare/v0.2.2...v0.3.0
 [0.2.2]: https://github.com/hailanlan0577/claude-project-survival-kit/compare/v0.2.1...v0.2.2
 [0.2.1]: https://github.com/hailanlan0577/claude-project-survival-kit/compare/v0.2.0...v0.2.1
 [0.2.0]: https://github.com/hailanlan0577/claude-project-survival-kit/compare/v0.1.0...v0.2.0
