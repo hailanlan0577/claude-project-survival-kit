@@ -121,11 +121,17 @@ bash scripts/deploy.sh --restart
 
 按顺序：
 
-1. **用中文**总结你对项目状态的理解（3-5 句话）
-2. 问用户：要继续干嘛？建议的下一步：
+1. **扫一下 Obsidian** 最近相关文档（v0.2.2 新增）：
+   - 用 `mcp__obsidian__obsidian_simple_search` 搜本项目 tag
+   - 过滤 frontmatter `tags:` 包含该 tag 的文档，按修改时间降序取前 **3 个**
+   - 读标题 + frontmatter + 第一段
+   - 无匹配就跳过
+2. **用中文**总结项目状态（3-5 句话），**如果第 1 步找到了相关 Obsidian 文档就一并报**
+3. 问用户：要继续干嘛？建议的下一步：
    - 决定当前阻塞的修复路径（A/B/C）
+   - 或者读某份 Obsidian 文档的细节
    - 或者其他工作选项
-3. **等用户回复再动手**，不要自己决定就开干
+4. **等用户回复再动手**，不要自己决定就开干
 
 ---
 
@@ -135,6 +141,6 @@ bash scripts/deploy.sh --restart
 
 > "感觉上下文接近满了，要不要我按 OFFBOARDING.md 做一次收尾，让下一个窗口无缝接上？"
 
-用户确认后，读 `OFFBOARDING.md` 执行 8 步收尾 checklist。
+用户确认后，读 `OFFBOARDING.md` 执行 9 步收尾 checklist（v0.2.1 把 8 步扩到 9 步，加了"Obsidian 沉淀"）。
 
 祝玩得愉快！

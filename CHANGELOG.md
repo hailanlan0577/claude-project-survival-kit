@@ -4,6 +4,27 @@
 
 ## [Unreleased]
 
+## [0.2.2] — 2026-04-15
+
+**主题：闭合 offboard → onboard 循环 — onboard 自动读最近 Obsidian 文档**
+
+### Changed 变更
+- `skills/proj-onboard/SKILL.md` — 步骤从 4 步扩到 5 步，新增"第 2 步 扫 Obsidian 最近相关文档"
+- `templates/ONBOARDING.md.tpl` — 同步扩步骤 + 修 v0.2.1 漏掉的"8 步→9 步"残留
+- 新的第 2 步行为：
+  - 按项目 tag 取**最近 3 个** Obsidian 文档（不设时间阈值，按 tag 取最新 N 个比"最近 N 天"更稳 — 跨周末/长假都不会漏）
+  - 首选 `mcp__obsidian__obsidian_simple_search`，降级到 shell `find + head + grep + stat`
+  - 扫不到就跳过，不阻塞 onboard 流程
+- 第 3 步汇报时把这 3 个文档标题纳入状态汇报，问用户"要读细节吗"
+
+### Fixed 修复
+- `templates/ONBOARDING.md.tpl` 里遗留的"读 `OFFBOARDING.md` 执行 8 步收尾"已改为"9 步"（v0.2.1 漏补）
+
+### Meta
+- 补齐 v0.2.1 的对称性缺口：offboard 写 Obsidian ≠ onboard 读 Obsidian
+- 原设计方案曾考虑过"48 小时阈值"，用户追问"超过 48 小时怎么办" → 改成"按 tag 取最近 N 个"，覆盖所有场景
+- 本次也只改了 kit 侧 + lbc 副本；其他通过 setup-kit 生成的项目需要单独同步（未来可做 migration 脚本）
+
 ## [0.2.1] — 2026-04-15
 
 **主题：织补 dogfooding gap — offboard 纳入 Obsidian 沉淀**
@@ -66,7 +87,8 @@
 - `/proj-offboard` skill — 每个项目生成专属的 `/<缩写>-offboard`（8 步收场 checklist）
 - `README.md` + `skills-installer.md` — 使用说明 + 手动安装指南
 
-[Unreleased]: https://github.com/hailanlan0577/claude-project-survival-kit/compare/v0.2.1...HEAD
+[Unreleased]: https://github.com/hailanlan0577/claude-project-survival-kit/compare/v0.2.2...HEAD
+[0.2.2]: https://github.com/hailanlan0577/claude-project-survival-kit/compare/v0.2.1...v0.2.2
 [0.2.1]: https://github.com/hailanlan0577/claude-project-survival-kit/compare/v0.2.0...v0.2.1
 [0.2.0]: https://github.com/hailanlan0577/claude-project-survival-kit/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/hailanlan0577/claude-project-survival-kit/releases/tag/v0.1.0

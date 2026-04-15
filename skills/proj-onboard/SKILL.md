@@ -42,9 +42,29 @@ Read tool: <绝对路径>/ONBOARDING.md
 - 文档读取优先顺序
 - 上一次会话踩的坑
 
-### 第 2 步：用中文汇报状态（3-5 句话）
+### 第 2 步：扫 Obsidian 最近相关文档（v0.2.2 新增）
 
-按以下结构：
+上次会话的 `/save-to-obsidian` 可能在 Obsidian vault 写过本项目的 ADR / Design Doc / Retro / Brainstorm / Learning。**不读就会漏掉最新决策**（STATUS.md 写不下的细节都在这些文档里）。
+
+**做法（有 Obsidian MCP 时）：**
+1. 调 `mcp__obsidian__obsidian_simple_search`，query 传项目 tag（例：`<项目 tag>`，通常就是项目名或简写）
+2. 过滤 frontmatter `tags:` 包含该 tag 的文档
+3. 按 `last_updated` / 文件 mtime **降序取前 3 个**（按 tag 取最新 N 个，不按"最近 N 天"——跨周末/长假也不会漏）
+4. 读每个的 frontmatter + 第一段摘要
+
+**Fallback（MCP 不可用时）：**
+```bash
+VAULT="<用户 Obsidian vault 路径>"  # 默认 /Users/<你>/Library/Mobile Documents/iCloud~md~obsidian/Documents/<vault 名>
+find "$VAULT" -name "*.md" -exec sh -c \
+  'head -20 "$1" | grep -q "<项目 tag>" && stat -f "%m %N" "$1"' _ {} \; \
+  | sort -rn | head -3 | awk '{print $2}'
+```
+
+**跳过条件：** 扫不到任何 tag 匹配文档 → 跳过本步，直接第 3 步。
+
+### 第 3 步：用中文汇报状态（3-5 句话）
+
+按以下结构（**有第 2 步的 Obsidian 结果就加一段**）：
 
 > 好的，我来继续 <项目名> 项目。简单汇报一下现状：
 >
@@ -54,13 +74,19 @@ Read tool: <绝对路径>/ONBOARDING.md
 >
 > **下一步候选**：<列 A/B/C 或用户上次留的"下次第一件事">
 >
+> **（可选）Obsidian 最近相关文档** — 找到 N 份（按修改时间倒序）：
+> 1. `<标题 1>`（<日期>）— <frontmatter 摘要>
+> 2. `<标题 2>`...
+> 3. `<标题 3>`...
+> 要我读某一份的细节吗？
+>
 > 你想继续干哪件事？
 
-### 第 3 步：等用户回复再动手
+### 第 4 步：等用户回复再动手
 
 **绝对不要**自己决定走哪条路径。问用户之后**等他明确指令**再开始。
 
-### 第 4 步：如果 `STATUS.md` 末尾有"🎯 下次进来第一件事"
+### 第 5 步：如果 `STATUS.md` 末尾有"🎯 下次进来第一件事"
 
 那是**上个 Claude 留给你的便条**，优先参考。在汇报里提一句：
 
