@@ -76,6 +76,7 @@ cp templates/CLAUDE.md.tpl        "$PROJ_PATH/CLAUDE.md"
 cp templates/STATUS.md.tpl        "$PROJ_PATH/STATUS.md"
 cp templates/RUNBOOK.md.tpl       "$PROJ_PATH/RUNBOOK.md"
 cp templates/.gitignore.tpl       "$PROJ_PATH/.gitignore"
+cp templates/.graphifyignore.tpl  "$PROJ_PATH/.graphifyignore"   # v0.3.1 新增
 mkdir -p "$PROJ_PATH/scripts"
 cp templates/scripts/deploy.sh.tpl "$PROJ_PATH/scripts/deploy.sh"
 chmod +x "$PROJ_PATH/scripts/deploy.sh"
@@ -92,6 +93,27 @@ chmod +x "$PROJ_PATH/scripts/deploy.sh"
 - 等等
 
 **对非程序员友好**：填完后让用户**检查一遍**再继续。
+
+### 第 3.5 步：按技术栈定制 `.graphifyignore`（v0.3.1 新增）
+
+基于用户第 6 题"技术栈"答案，Edit 项目根的 `.graphifyignore`，**取消注释对应的段落**：
+
+- 答案含 `Go` / `golang` → 取消注释 `Go 项目` 段
+- 答案含 `Node` / `JavaScript` / `TypeScript` / `React` / `Vue` / `Next` → 取消注释 `Node.js 项目` 段
+- 答案含 `Python` / `Django` / `FastAPI` / `Flask` → 取消注释 `Python 项目` 段
+- 答案含 `Rust` → 取消注释 `Rust 项目` 段
+- 答案含 `Java` / `Kotlin` → 取消注释 `Java / Kotlin` 段
+- **多栈项目**（比如 Go 后端 + TS 前端）→ 多段一起取消注释
+
+示例（Go 项目）：
+
+```bash
+cd "$PROJ_PATH"
+# 取消 Go 段注释
+sed -i '' 's|^# vendor/|vendor/|; s|^# bin/|bin/|; s|^# \*.test|*.test|' .graphifyignore
+```
+
+**验证**：`cat .graphifyignore | grep -v '^#' | grep -v '^$'` 应该列出该项目会忽略的真实路径。
 
 ### 第 4 步：安装 2 个 skill 到 `~/.claude/skills/`
 
@@ -198,6 +220,25 @@ tags: <项目名>,setup-kit,<日期>
 content: "<项目名> 2026-MM-DD 新建救命套件：源码 <绝对路径>，GitHub <URL>，skill /<PROJ>-onboard 和 /<PROJ>-offboard 已装。当前状态：<一句话>。"
 ```
 
+### 第 9.5 步：初始 graphify 体检（问用户，v0.3.1 新增）
+
+**问用户**：
+
+> 要不要现在跑一次 `/proj-graphify` 给项目做初始结构体检？跑一次大概花 30 秒 + 少量 token，跑完下次 `/<PROJ>-onboard` 就能自动读到这份图谱，新 Claude 进门就有地图。
+>
+> 选 y 跑 / n 跳过（以后需要时再跑也行）
+
+**如果用户说 y**：
+
+```
+Skill 调用: proj-graphify
+参数: $PROJ_PATH
+```
+
+graphify 自己会做 detect → 提取 → 报告 → 软链回项目根。不用你管。
+
+**如果用户说 n**：直接跳到第 10 步，不跑。
+
 ### 第 10 步：报告用户
 
 ```
@@ -211,8 +252,9 @@ content: "<项目名> 2026-MM-DD 新建救命套件：源码 <绝对路径>，Gi
 
 **文档结构**:
   ONBOARDING.md / OFFBOARDING.md / CLAUDE.md / STATUS.md / RUNBOOK.md
-  scripts/deploy.sh / .gitignore
+  scripts/deploy.sh / .gitignore / .graphifyignore（v0.3.1）
   configs/config.example.yaml（入库）/ config.yaml（本地真密钥）
+  graphify-out/GRAPH_REPORT.md（如第 9.5 步跑了 graphify，为软链）
 
 **下次用法**:
   - 新窗口继续做这个项目：打 /<PROJ>-onboard 或说"继续 <项目名>"

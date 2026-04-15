@@ -4,6 +4,23 @@
 
 ## [Unreleased]
 
+## [0.3.1] — 2026-04-15
+
+**主题：补 v0.3.0 的 dogfooding 尾巴 — setup-kit 终于会自动生成 `.graphifyignore`**
+
+### Added 新增
+- `templates/.graphifyignore.tpl` — 按技术栈分段的 graphify 排除模板（Go / Node / Python / Rust / Java 等，默认全注释，setup-kit 按 Q6 答案取消对应段）
+- `skills/setup-kit/SKILL.md` 新增第 3.5 步：按技术栈定制 `.graphifyignore`
+- `skills/setup-kit/SKILL.md` 新增第 9.5 步：问用户要不要跑初始 `/proj-graphify`（建第一份图谱，让首次 onboard 就能读到）
+
+### Fixed 修复
+- v0.3.0 遗留的 dogfooding gap：`/proj-graphify` 建了、onboard 会读图谱了，但 setup-kit 新建项目时不生成 `.graphifyignore`——每次都要用户手动补（今晚给 lbc 和二奢软件各补了一次）
+
+### Meta
+- 3 小时发了第 5 个版本（v0.2.0/.1/.2 + v0.3.0/.1），但每一次都是真实 gap 触发的，没有灌水
+- "新功能闭环"原则：新加一个能力（比如 /proj-graphify），要检查对应的"生成路径"（setup-kit）、"使用路径"（onboard）、"失效路径"（>30 天提示）都搞定
+- 下次新项目 `/setup-kit` 会自带 `.graphifyignore` + 初始 graphify 图谱，不用手打补丁
+
 ## [0.3.0] — 2026-04-15
 
 **主题：接入 graphify 做项目结构体检 — 新 skill `/proj-graphify` + onboard 自动读图谱报告**
@@ -116,7 +133,8 @@
 - `/proj-offboard` skill — 每个项目生成专属的 `/<缩写>-offboard`（8 步收场 checklist）
 - `README.md` + `skills-installer.md` — 使用说明 + 手动安装指南
 
-[Unreleased]: https://github.com/hailanlan0577/claude-project-survival-kit/compare/v0.3.0...HEAD
+[Unreleased]: https://github.com/hailanlan0577/claude-project-survival-kit/compare/v0.3.1...HEAD
+[0.3.1]: https://github.com/hailanlan0577/claude-project-survival-kit/compare/v0.3.0...v0.3.1
 [0.3.0]: https://github.com/hailanlan0577/claude-project-survival-kit/compare/v0.2.2...v0.3.0
 [0.2.2]: https://github.com/hailanlan0577/claude-project-survival-kit/compare/v0.2.1...v0.2.2
 [0.2.1]: https://github.com/hailanlan0577/claude-project-survival-kit/compare/v0.2.0...v0.2.1
