@@ -4,6 +4,22 @@
 
 ## [Unreleased]
 
+## [0.3.4] — 2026-05-05
+
+**主题：onboard 第 3 步 Obsidian 改"读整篇"——v0.3.3 的"前 30 行"折中被否决**
+
+### Changed 改动
+- `skills/proj-onboard/SKILL.md` 第 3 步：从「读每篇前 30 行（frontmatter + 第一段）」升级为**「读每篇整篇」**（不带 offset/limit）
+
+### Why 为什么
+- v0.3.3 用"前 30 行"是为了省 token（约 30 × 3 = 90 行）
+- 但用户立刻反馈：「obsidian 文档不是读整篇？」—— 关键决策可能写在文档中后段（如 5-05 v2.2 复盘 405 行，"晚段拍板"在 200+ 行处）
+- 取舍重新评估：onboard 是关键决策点，漏决策的代价远大于多花 5-7K token；3 篇 × 200-500 行 ≈ 1500 行总量在 onboard 阶段可接受
+
+### Meta
+- 学习：写 skill 时「省 token」直觉不能凌驾于「不漏关键信息」之上，特别是 onboard / 复盘 这种"关键节点"
+- 已先在 ytst/lbc/cpsk 项目专用 onboard skill 同步落地
+
 ## [0.3.3] — 2026-05-05
 
 **主题：onboard 防偷懒——读图谱和 Obsidian 文档加强制 + 自检要求**
