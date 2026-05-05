@@ -4,6 +4,22 @@
 
 ## [Unreleased]
 
+## [0.3.3] — 2026-05-05
+
+**主题：onboard 防偷懒——读图谱和 Obsidian 文档加强制 + 自检要求**
+
+### Changed 改动
+- `skills/proj-onboard/SKILL.md` 第 2 步加**强制要求**：必须用 Read tool 一次性读完整篇 GRAPH_REPORT.md（不带 offset/limit），严禁用 Bash head/sed 偷懒；汇报必须明示「已 Read NN 行 / NN KB」+ 至少 4 节内容（上帝节点 / 社区结构 / 意外连接 / 弱连接节点）
+- `skills/proj-onboard/SKILL.md` 第 3 步加**强制要求**：找到 3 个 Obsidian 文件名后必须真用 Read tool 读每篇前 30 行，严禁只 ls 文件名靠会话总结瞎报；汇报明示「已 Read 3 篇（每篇 30 行）」+ 真实 frontmatter
+
+### Why 为什么
+- 用户在另一窗口跑 `/ytst-onboard`，问"你刚才有读图谱吗"，那个 Claude 诚实承认：**只读了 GRAPH_REPORT.md 前 120 行（全文 600+ 行）+ Obsidian 文档只列了文件名没读内容**
+- 根因：旧 skill 用「读它」「读每个的 frontmatter」这种**软描述**，模型本能偷懒就钻空子
+- 新逻辑加强制语气 + 自检报告（"已 Read NN 行"自报数字让用户能验证），偷懒就被自报数字暴露
+
+### Meta
+- 已先在三个项目专用 onboard skill 落地（`~/.claude/skills/ytst-onboard` / `lbc-onboard` / `cpsk-onboard`），验证模式后回流模板
+
 ## [0.3.2] — 2026-05-05
 
 **主题：offboard 自动跑 `graphify --update` — 图谱永远跟代码同步，零思考**
