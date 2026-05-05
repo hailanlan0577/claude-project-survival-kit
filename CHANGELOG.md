@@ -4,6 +4,27 @@
 
 ## [Unreleased]
 
+## [0.3.2] — 2026-05-05
+
+**主题：offboard 自动跑 `graphify --update` — 图谱永远跟代码同步，零思考**
+
+### Added 新增
+- `skills/proj-offboard/SKILL.md` 新增**第 6.5 步**：每次 offboard 必跑 `graphify --update`（增量，30-60 秒），保证图谱永远新鲜
+- 第 6.5 步带兜底逻辑：如果 `~/graphify-runs/<项目>/graphify-out` 不存在 → 全量首跑；否则增量更新
+
+### Changed 改动
+- `templates/OFFBOARDING.md.tpl` 的"配套体检 skill"段：把"何时跑"从"手动判断（发版前 / 大重构后 / 每季度）"改为"每次 offboard 自动跑 --update"
+- `skills/proj-offboard/SKILL.md` 的"相关文档"段：把 `/proj-graphify` 定位从"日常体检"改为"重建图谱（强制全量）"
+
+### Why 为什么
+- 旧逻辑（v0.3.0/0.3.1）：onboard 自动读图谱，但 offboard 不更新 → 图谱永远落后代码 1 个会话
+- ytst 5-05 实战发现：上次 offboard 没跑 graphify，第二天 onboard 读到的是 14 天前的图，不反映新加的 4 个实验脚本 + 决策
+- 新逻辑：offboard 每次跑增量 update（30-60 秒成本可忽略），onboard 直接读现成的，永远新鲜
+
+### Meta
+- 已先在三个项目专用 offboard skill 落地（`~/.claude/skills/ytst-offboard` / `lbc-offboard` / `cpsk-offboard`），验证逻辑可行后再回流到 cpsk 模板
+- 此版本只改 cpsk 模板源，未来用 setup-kit 创建的新项目会自带这能力
+
 ## [0.3.1] — 2026-04-15
 
 **主题：补 v0.3.0 的 dogfooding 尾巴 — setup-kit 终于会自动生成 `.graphifyignore`**

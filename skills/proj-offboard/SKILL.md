@@ -87,6 +87,26 @@ bash scripts/deploy.sh --restart
 
 ### 第 6 步：大变动？更新 CLAUDE.md 代码地图
 
+### 第 6.5 步：跑 graphify 增量更新项目图谱（必做，v0.3.2 新增）
+
+**任何 offboard 都跑这一步**（保证图谱跟代码永远同步，不留 stale 图给下个 onboard）。
+
+```bash
+OUT_DIR="$HOME/graphify-runs/<项目名>"
+if [ -d "$OUT_DIR/graphify-out" ]; then
+  cd "$OUT_DIR" && /graphify --update <项目根路径>
+else
+  # 第一次跑（没有现成图谱）→ 全量
+  cd "$HOME/graphify-runs" && mkdir -p <项目名> && cd <项目名> && /graphify <项目根路径>
+fi
+```
+
+**说明**：
+- 增量 `--update` 通常 30-60 秒（只重抽改动的文件）
+- 全量首跑 5-10 分钟（只在完全没图时跑一次）
+- 软链 `<项目根>/graphify-out/` → `~/graphify-runs/<项目名>/graphify-out/` 已建好，下次 onboard 自动读
+- **绝不**跑全量重建（除非用户明确要求 `/proj-graphify` 重置）—— 浪费 token
+
 ### 第 7 步：记忆系统存一条进度
 
 调用项目约定的记忆系统（Qdrant / claude-mem 等）：
@@ -130,6 +150,7 @@ content: "<项目名> YYYY-MM-DD 进展：<今天关键结果>。下次第一件
 ✅ 4. 部署已完成（或：无代码改动，跳过）
 ✅ 5. 密钥已同步（或：无变化，跳过）
 ✅ 6. CLAUDE.md 代码地图已更新（或：无大变动，跳过）
+✅ 6.5. 项目图谱已增量更新（graphify --update，约 30-60 秒）
 ✅ 7. 记忆已存 [ID: xxxxxxxx]
 ✅ 8. Obsidian 文档已沉淀：[文档名]（或：无值得沉淀的讨论，跳过）
 ✅ 9. STATUS.md 末尾便条已留："下次第一件事做 X"
@@ -147,6 +168,6 @@ content: "<项目名> YYYY-MM-DD 进展：<今天关键结果>。下次第一件
 ## 相关文档与 skill
 
 - 仓库根：`OFFBOARDING.md`（权威 checklist）
-- 配对 skill：`/<PROJ>-onboard`（新会话开场）
-- **结构体检 skill（v0.3.0 新增）**：`/proj-graphify`——本次改了大量文件 / 架构 / 新加模块时，收尾后或发版前跑一次，看有没有结构债
+- 配对 skill：`/<PROJ>-onboard`（新会话开场，自动读图谱）
+- **结构体检 skill**：`/proj-graphify`——只在用户明确要求"重建图谱"时用（强制全量）。**日常 offboard 已经在第 6.5 步自动跑增量 update**，不需要手动触发
 - 密钥表：`~/.claude/projects/*/memory/credentials.md`

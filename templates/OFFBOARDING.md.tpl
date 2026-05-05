@@ -187,9 +187,9 @@ STATUS.md / ONBOARDING.md / 记忆系统都更新
 
 ---
 
-## 🗺️ 配套体检 skill（v0.3.0）
+## 🗺️ 配套体检 skill（v0.3.2 起）
 
-- **`/proj-graphify`** — 给项目做结构体检，输出知识图谱（God Nodes / Communities / Surprising Connections）
-- **何时跑**：发 MINOR / MAJOR 版本前、大重构后、每季度一次
-- **不用跑**：每次 offboard（烧 token 没价值，小改动无信息增量）
+- **每次 offboard 自动跑 `graphify --update`** —— 增量更新（30-60 秒），保证图谱永远跟代码同步
+- **`/proj-graphify`** — 只在**重建图谱**（强制全量）时手动跑：发 MAJOR 版本前 / 大重构后 / 觉得图谱跟代码偏差太大想重置
+- **下次 `/<PROJ>-onboard` 会自动读** `graphify-out/GRAPH_REPORT.md`（<30 天的会被当项目地图用）
 - 跑完后，下次 `/<PROJ>-onboard` 会**自动读** `graphify-out/GRAPH_REPORT.md`（<30 天的会被当项目地图用）
