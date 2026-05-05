@@ -4,6 +4,30 @@
 
 ## [Unreleased]
 
+## [0.3.5] — 2026-05-05
+
+**主题：onboard 加 umbrella 铁律——本 skill 所有文档必须 Read 完整，零例外**
+
+### Added 新增
+- `skills/proj-onboard/SKILL.md` 在「执行步骤」段开头加 **🔴 铁律段**，明确列出本 skill 涉及的全部 4 类文档（ONBOARDING / GRAPH_REPORT / 3 篇 Obsidian / STATUS），全部必须 Read 完整 + 自报行数
+
+### Why 为什么
+- v0.3.3 / v0.3.4 只覆盖第 2/3 步（GRAPH_REPORT + Obsidian）
+- 用户立刻指出：第 1 步（ONBOARDING）和第 6 步（STATUS 末尾便条）还是软描述「读它」/「如果末尾有...」 → 同样会被偷懒
+- 修复：加 umbrella 铁律覆盖全部 4 类文档，未来加新文档也自动落入铁律
+
+### 文档清单（铁律覆盖范围）
+| 步骤 | 文档 | 完整读法 |
+|---|---|---|
+| 1 | ONBOARDING.md | 完整（200+ 行，含全部禁忌） |
+| 2 | graphify-out/GRAPH_REPORT.md | 完整（22KB / 600+ 行） |
+| 3 | 3 篇 Obsidian 文档 | 每篇整篇（v0.3.4 已落地） |
+| 6 | STATUS.md | 完整（含末尾便条 + 历史时间线） |
+
+### Lesson 教训
+- 写"防偷懒"规则时不能只覆盖部分步骤，要 umbrella 一刀切
+- 用户的"通通完整读"诉求 = 不留协商空间 = skill 不留软描述
+
 ## [0.3.4] — 2026-05-05
 
 **主题：onboard 第 3 步 Obsidian 改"读整篇"——v0.3.3 的"前 30 行"折中被否决**

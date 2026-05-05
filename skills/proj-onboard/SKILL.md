@@ -28,6 +28,25 @@ user-invocable: true
 
 ## 执行步骤（严格按顺序）
 
+> **🔴 铁律：本 skill 涉及的所有文档必须 Read 完整（v0.3.5 立）**
+>
+> 文档清单：
+> - `ONBOARDING.md`（第 1 步）
+> - `graphify-out/GRAPH_REPORT.md`（第 2 步）
+> - 3 篇 Obsidian 相关文档（第 3 步）
+> - `STATUS.md`（第 6 步）
+>
+> **全部必须用 Read tool 一次性完整读完**，不带 offset/limit（默认 2000 行兜底）。
+>
+> **严禁：**
+> - 用 Bash `head` / `tail` / `sed` / `grep` 偷懒代替真读
+> - 用会话总结里的"标题/摘要"代替真读文档内容
+> - 只读前 N 行就开始汇报
+>
+> **必须自检：** 每读完一个文档，在汇报里**明示**「已 Read XXX.md（NN 行）」
+>
+> 漏报数字 = 没读 = 违反铁律 = 必须重做。
+
 ### 第 1 步：读仓库 ONBOARDING.md
 
 ```
