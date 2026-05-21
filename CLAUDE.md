@@ -92,7 +92,7 @@ diff -q skills/proj-onboard/SKILL.md ~/.claude/skills/proj-onboard/SKILL.md 2>/d
 
 # 图谱新鲜度
 [ -L graphify-out/GRAPH_REPORT.md ] && \
-  echo "图谱: $(( ($(date +%s) - $(stat -f %m graphify-out/GRAPH_REPORT.md)) / 86400 )) 天前"
+  echo "图谱: $(( ($(date +%s) - $(stat -L -f %m graphify-out/GRAPH_REPORT.md)) / 86400 )) 天前"
 ```
 
 ## 🔑 敏感文件
