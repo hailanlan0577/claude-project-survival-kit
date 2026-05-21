@@ -68,7 +68,7 @@ Read tool: <绝对路径>/ONBOARDING.md
 ```bash
 REPORT="<绝对路径>/graphify-out/GRAPH_REPORT.md"
 if [ -f "$REPORT" ]; then
-  age_days=$(( ($(date +%s) - $(stat -f %m "$REPORT")) / 86400 ))
+  age_days=$(( ($(date +%s) - $(stat -L -f %m "$REPORT")) / 86400 ))
   if [ "$age_days" -lt 30 ]; then
     echo "读图谱（$age_days 天前跑的）"
     # 读它，把 God Nodes / Communities / Surprising Connections 三节塞进汇报
@@ -102,8 +102,8 @@ fi
 ```bash
 VAULT="<用户 Obsidian vault 路径>"  # 默认 /Users/<你>/Library/Mobile Documents/iCloud~md~obsidian/Documents/<vault 名>
 find "$VAULT" -name "*.md" -exec sh -c \
-  'head -20 "$1" | grep -q "<项目 tag>" && stat -f "%m %N" "$1"' _ {} \; \
-  | sort -rn | head -3 | awk '{print $2}'
+  'head -20 "$1" | grep -q "<项目 tag>" && stat -L -f "%m %N" "$1"' _ {} \; \
+  | sort -rn | head -3 | cut -d' ' -f2-
 ```
 
 **跳过条件：** 扫不到任何 tag 匹配文档 → 跳过本步，直接第 4 步。
