@@ -99,7 +99,7 @@
 | Skill | 触发 | 作用 |
 |-------|------|------|
 | `<proj>-onboard` | 打 `/` 或说"继续项目" | 新 Claude 读手册后汇报状态 |
-| `<proj>-offboard` | 打 `/` 或说"下班" | 按 8 步 checklist 存档 |
+| `<proj>-offboard` | 打 `/` 或说"下班" | 按 9 步 checklist 存档 |
 
 ### 🎬 完整会话生命周期
 
@@ -116,20 +116,34 @@ Claude 读 ONBOARDING.md → 汇报状态 → 问你下一步
    ↓
 贴收场口令 / 打 /proj-offboard / 随口说"存档"
    ↓
-Claude 跑 8 步 checklist：
+Claude 跑 9 步 checklist：
   1. 更新 STATUS.md 今天做了什么
   2. 新坑进 ONBOARDING 禁忌
   3. git commit + push
   4. 部署（如需要）
   5. 密钥同步（如有变化）
   6. CLAUDE.md 代码地图（如大变动）
-  7. Qdrant 记忆存进度
-  8. STATUS.md 末尾留"下次第一件事"
+  6.5. 刷新 cbm 代码索引（如接了 cbm，见下方"进阶可选"）
+  7. 记忆系统存进度
+  8. Obsidian 沉淀（如有实质讨论）
+  9. STATUS.md 末尾留"下次第一件事"
    ↓
 关窗口，所有状态都保存
    ↓
 [明天 / 下周 / 下个月 再开窗口 → 继续贴开场口令 → 无缝接上]
 ```
+
+---
+
+## 🔍 进阶可选：给代码项目接 cbm 代码图谱（v0.4.0）
+
+如果你的项目有**真实代码**（不只是文档），可以接入 [codebase-memory-mcp（cbm）](https://github.com/DeusData/codebase-memory-mcp)——一个把代码扫成"知识图谱"的小工具（单个二进制、零依赖）。接上后：
+
+- **开窗（onboard）**：Claude 自动拿到代码架构概览（有哪些模块、入口、热点），秒懂项目结构
+- **下班（offboard）**：自动刷新代码索引，保持新鲜
+- **省 token**：查代码不用一个文件一个文件翻，官方实测省约 99%
+
+**纯可选**：没接 cbm 的项目，onboard / offboard 会自动跳过这步、完全不影响。装法见 cbm 仓库。
 
 ---
 
