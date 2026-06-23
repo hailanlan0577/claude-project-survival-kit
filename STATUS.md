@@ -27,6 +27,14 @@
 4. ⚠️ **分身 skill 改完即时生效**（live change detection），但 **MCP 工具要重启窗口才接线**（开窗时才连）；老窗口收尾不用重启（offboard 走 CLI 不靠 MCP）
 5. ⚠️ **deploy.sh 故意跳过 proj-onboard/proj-offboard 模板**（给 setup-kit 用、不直接装）→ 改模板后无需 deploy；分身 skill 要直接改
 
+### ➕ v0.4.1 收口（首次 offboard 后追加，为分享给朋友做全仓一致性）
+
+- ✅ **README 对齐**：offboard checklist 8→9 步（补 Obsidian + cbm 6.5），加"进阶可选：接 cbm 代码图谱"小节
+- ✅ **文档模板 + cpsk 根文件对齐 cbm**：`templates/ONBOARDING.md.tpl` / `OFFBOARDING.md.tpl` / 根 `ONBOARDING.md` / `OFFBOARDING.md` 的 graphify 扫代码表述全迁到 cbm
+- ✅ **setup-kit 第 9.5 步**：初始 graphify 体检 → 初始 cbm 接入（建 `.mcp.json` + 索引）→ 升 **v0.4.1**
+- commit：`c6752d0`(README) / `93690e8`(文档对齐) / `a65e4f7`(setup-kit+v0.4.1)，均已推 GitHub
+- ⏸️ **暂不清的小尾巴**（用户选"就到这"）：`proj-graphify` skill 自述仍有"输出供 onboard 读取"的过时说法（onboard 已改读 cbm）；`CLAUDE.md` 健康检查 + `RUNBOOK.md` §5 的 graphify 痕迹保留（graphify 工具本身仍有效）
+
 ---
 
 ## 📅 2026-04-15
@@ -73,12 +81,12 @@
 
 ## 🎯 下次进来第一件事
 
-**cbm 接管代码地图（v0.4.0）已全量落地**，8 个项目都能用了。可选下一步：
+**cbm 接管代码地图已全量落地（已到 v0.4.1，全仓一致、已分享朋友）**，8 个代码项目都能用了。可选下一步：
 
-- **A** — 在 lp4 / 其它项目实战用几天 cbm，验证"省 token + 查代码"的真实体感，再决定要不要做 v0.4.1 微调
-- **B** — 给 cbm v0.8.1 的 #557 静默删库 bug 加个防护（定时备份 `~/.cache/codebase-memory-mcp/` 或盯 cbm 升级修复）
-- **C** — 补 GitHub Release notes（v0.4.0 + 之前几个 tag）
-- **D** — 把 cbm-pro 同步问题想清楚（这次没动 cpsk-pro，并行版还是老 graphify）
+- **A** — 清掉 `proj-graphify` skill 自述里"输出供 onboard 读取"的过时说法（onboard 已改读 cbm）；想更彻底连 `CLAUDE.md` 健康检查 + `RUNBOOK.md` §5 的 graphify 痕迹一起清
+- **B** — 在 lp4 / 其它项目实战用几天 cbm，验证"省 token + 查代码"的真实体感
+- **C** — 给 cbm v0.8.1 的 #557 静默删库 bug 加防护（定时备份 `~/.cache/codebase-memory-mcp/` 或盯 cbm 升级）
+- **D** — 把 cpsk-pro 同步问题想清楚（这次没动并行版，它还是老 graphify）
 - **E** — 休息
 
 **回滚随时可用**：`bash ~/cbm-migration-backup-2026-06-23/rollback.sh`（覆盖 18 分身 skill）。
