@@ -96,6 +96,8 @@ bash scripts/deploy.sh --restart
      `codebase-memory-mcp cli index_repository '{"repo_path": "<项目根路径>"}'`
   2. （可选）需团队共享 → 导出 / 提交 `.codebase-memory/graph.db.zst`
 
+> 注：`index_repository` 用的是**仓库路径** `repo_path`（不是项目名），直接给项目根路径即可——这跟 onboard 用项目名的工具不同，正常。
+>
 > 说明：cbm 索引存 `~/.cache/codebase-memory-mcp/`，可重建，不作唯一数据源。
 
 ### 第 7 步：记忆系统存一条进度
@@ -160,5 +162,5 @@ content: "<项目名> YYYY-MM-DD 进展：<今天关键结果>。下次第一件
 
 - 仓库根：`OFFBOARDING.md`（权威 checklist）
 - 配对 skill：`/<PROJ>-onboard`（新会话开场，自动用 cbm 拿代码全局）
-- **结构体检 skill**：`/proj-graphify`——只在用户明确要求"重建项目结构图谱"时用（强制全量）。**日常 offboard 的第 6.5 步已改为刷新 cbm 代码索引**，不依赖 graphify
+- **结构体检 skill**：`/proj-graphify`——只在用户明确要求"重建项目结构图谱"时用（强制全量）（保留给**非 cbm 项目**，或用户想要 Markdown 可视化笔记图谱时用）。**日常 offboard 的第 6.5 步已改为刷新 cbm 代码索引**，不依赖 graphify
 - 密钥表：`~/.claude/projects/*/memory/credentials.md`

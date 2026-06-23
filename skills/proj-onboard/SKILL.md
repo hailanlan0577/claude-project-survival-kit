@@ -73,6 +73,8 @@ Read tool: <绝对路径>/ONBOARDING.md
 3. 调 `get_architecture`（带上项目名）拿：语言 / 包 / 入口 / 路由 / 热点 / 模块聚类
 4. 把架构概览纳入开场中文汇报的"项目地图"小节（3-5 句）
 
+> cbm 这些工具都在 MCP 服务 `codebase-memory-mcp` 下；`list_projects` / `index_status` / `get_architecture` 都用**项目名**（cbm 按路径派生，故先 `list_projects` 查名）。
+>
 > 注：graphify 不再用于扫项目代码（已交给 cbm），它专心管 Obsidian 笔记图谱。proj-graphify skill 保留，仅不再被 onboard 自动调用。
 
 ### 第 3 步：扫 Obsidian 最近相关文档（v0.2.2 新增）
