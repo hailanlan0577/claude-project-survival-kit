@@ -220,24 +220,29 @@ tags: <项目名>,setup-kit,<日期>
 content: "<项目名> 2026-MM-DD 新建救命套件：源码 <绝对路径>，GitHub <URL>，skill /<PROJ>-onboard 和 /<PROJ>-offboard 已装。当前状态：<一句话>。"
 ```
 
-### 第 9.5 步：初始 graphify 体检（问用户，v0.3.1 新增）
+### 第 9.5 步：初始 cbm 代码图谱接入（问用户，v0.4.1）
 
-**问用户**：
+**前提**：项目有真实代码才有意义；纯文档项目可直接跳到第 10 步。先看 cbm（codebase-memory-mcp，代码记忆图谱）装没装：`~/.local/bin/codebase-memory-mcp --version`。
 
-> 要不要现在跑一次 `/proj-graphify` 给项目做初始结构体检？跑一次大概花 30 秒 + 少量 token，跑完下次 `/<PROJ>-onboard` 就能自动读到这份图谱，新 Claude 进门就有地图。
+**没装 cbm** → 告诉用户一句"想用代码图谱可装 cbm（见 https://github.com/DeusData/codebase-memory-mcp ，`curl … | bash -s -- --skip-config`），装好再接入"，然后跳到第 10 步。
+
+**装了 cbm，问用户**：
+
+> 要不要给这个项目接 cbm 代码图谱？接上后新 Claude 开窗 `/<PROJ>-onboard` 就能秒拿代码架构（模块/入口/热点），查代码省约 99% token。大概花 30 秒建初始索引。
 >
-> 选 y 跑 / n 跳过（以后需要时再跑也行）
+> 选 y 接 / n 跳过（以后需要时再接也行）
 
 **如果用户说 y**：
-
+1. 拿 cbm 绝对路径（`which codebase-memory-mcp` 或 `~/.local/bin/codebase-memory-mcp`），写进项目根 `.mcp.json`（若已存在则合并，保留其它 server）：
+```json
+{ "mcpServers": { "codebase-memory-mcp": { "command": "<cbm 绝对路径>", "args": [] } } }
 ```
-Skill 调用: proj-graphify
-参数: $PROJ_PATH
-```
+2. 建初始索引：`codebase-memory-mcp cli index_repository '{"repo_path": "$PROJ_PATH"}'`
+3. 告诉用户：下次新开这个项目窗口时，Claude Code 会问是否接 cbm，选 1 即可。
 
-graphify 自己会做 detect → 提取 → 报告 → 软链回项目根。不用你管。
+**如果用户说 n**：直接跳到第 10 步，不接。
 
-**如果用户说 n**：直接跳到第 10 步，不跑。
+> 注：graphify 不再用于扫项目代码（已交给 cbm）；`/proj-graphify` 保留仅手动用 / 笔记图谱。
 
 ### 第 10 步：报告用户
 
@@ -254,7 +259,7 @@ graphify 自己会做 detect → 提取 → 报告 → 软链回项目根。不�
   ONBOARDING.md / OFFBOARDING.md / CLAUDE.md / STATUS.md / RUNBOOK.md
   scripts/deploy.sh / .gitignore / .graphifyignore（v0.3.1）
   configs/config.example.yaml（入库）/ config.yaml（本地真密钥）
-  graphify-out/GRAPH_REPORT.md（如第 9.5 步跑了 graphify，为软链）
+  .mcp.json（如第 9.5 步接了 cbm，含 codebase-memory-mcp）
 
 **下次用法**:
   - 新窗口继续做这个项目：打 /<PROJ>-onboard 或说"继续 <项目名>"

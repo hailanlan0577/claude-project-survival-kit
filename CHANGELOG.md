@@ -4,6 +4,14 @@
 
 ## [Unreleased]
 
+## [0.4.1] — 2026-06-23
+
+### Changed
+- setup-kit 第 9.5 步：初始 graphify 体检 → **初始 cbm 代码图谱接入**（建 `.mcp.json` + 索引，含未装 cbm 的引导）
+- 文档全面对齐 cbm：`templates/ONBOARDING.md.tpl`、`templates/OFFBOARDING.md.tpl`、cpsk 根 `ONBOARDING.md` / `OFFBOARDING.md` 的"graphify 扫代码"表述迁到 cbm
+- README：offboard checklist 修正为 9 步（补 Obsidian + cbm 6.5），新增"进阶可选：接 cbm 代码图谱"小节
+- 完成 v0.4.0 cbm 迁移的全仓一致性收口（含 8 个代码项目分身 skill 推广）
+
 ## [0.4.0] — 2026-06-23
 
 ### Changed
