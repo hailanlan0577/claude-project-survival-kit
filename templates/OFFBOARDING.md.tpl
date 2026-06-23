@@ -187,9 +187,9 @@ STATUS.md / ONBOARDING.md / 记忆系统都更新
 
 ---
 
-## 🗺️ 配套体检 skill（v0.3.2 起）
+## 🗺️ 配套代码图谱（v0.4.0：cbm 接管）
 
-- **每次 offboard 自动跑 `graphify --update`** —— 增量更新（30-60 秒），保证图谱永远跟代码同步
-- **`/proj-graphify`** — 只在**重建图谱**（强制全量）时手动跑：发 MAJOR 版本前 / 大重构后 / 觉得图谱跟代码偏差太大想重置
-- **下次 `/<PROJ>-onboard` 会自动读** `graphify-out/GRAPH_REPORT.md`（<30 天的会被当项目地图用）
-- 跑完后，下次 `/<PROJ>-onboard` 会**自动读** `graphify-out/GRAPH_REPORT.md`（<30 天的会被当项目地图用）
+- **每次 offboard 第 6.5 步刷新 cbm 代码索引**（如项目接了 cbm）—— cbm 自带后台 watcher 自动保鲜，不确定就手动 `index_repository`
+- **未接 cbm 的项目自动跳过**，不报错
+- **下次 `/<PROJ>-onboard` 开窗自动用 cbm 拿代码架构概览**（语言/入口/热点/模块聚类）
+- `/proj-graphify` 保留，仅用于 Obsidian 笔记图谱或手动重建，不再扫项目代码

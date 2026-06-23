@@ -121,11 +121,11 @@ bash scripts/deploy.sh --restart
 
 按顺序：
 
-1. **读项目图谱报告**（如果新鲜）（v0.3.0 新增）：
-   - 检查 `graphify-out/GRAPH_REPORT.md` 是否存在
-   - 若存在且修改时间 < 30 天：读 God Nodes / Communities / Surprising Connections 三节，塞进第 3 步汇报
-   - 若 ≥ 30 天：不读正文，汇报时提示"图谱过期 N 天，要不要跑 /proj-graphify 重建？"
-   - 若不存在：跳过，汇报里提一句"暂无项目图谱，想看结构可以跑 /proj-graphify"
+1. **用 cbm 拿代码全局**（如果项目接了 cbm）（v0.4.0）：
+   - 项目根 / 全局 `.mcp.json` 含 `codebase-memory-mcp`，或能调通 cbm 工具 → 已接入
+   - 已接入：调 `list_projects` 查项目名 → 调 `get_architecture`（带项目名）拿语言/包/入口/热点/模块聚类，塞进第 3 步汇报
+   - 未接入：一句话跳过（"本项目未接 cbm，跳过代码图谱"），不报错
+   - （graphify 不再扫项目代码，已交给 cbm；graphify 专管 Obsidian 笔记图谱，proj-graphify 仅手动用）
 2. **扫一下 Obsidian** 最近相关文档（v0.2.2 新增）：
    - 用 `mcp__obsidian__obsidian_simple_search` 搜本项目 tag
    - 过滤 frontmatter `tags:` 包含该 tag 的文档，按修改时间降序取前 **3 个**

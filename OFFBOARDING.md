@@ -154,4 +154,4 @@ content: "CPSK YYYY-MM-DD: 发了 vX.Y.Z（主题）。下次第一件事：<X>�
 - **`/proj-graphify`** — 给 CPSK 做结构体检
 - **何时跑**：发 MINOR / MAJOR 版本前、大重构后、每季度一次
 - **不要跑**：每次 offboard（小改动无信息增量）
-- 跑完后 `/cpsk-onboard` 会**自动读** `graphify-out/GRAPH_REPORT.md`（<30 天的）
+- `/proj-graphify` 现仅管 Obsidian 笔记图谱；代码索引已由第 6.5 步 cbm 处理

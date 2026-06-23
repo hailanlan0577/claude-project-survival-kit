@@ -82,7 +82,7 @@
 | `RUNBOOK.md`（本仓库） | 要做 release / 遇到 git 问题 / 要改某个 skill |
 | `docs/`（10 章）| 想知道"为什么这样设计" |
 | Obsidian `工具/CPSK-工具链使用手册` | 想知道所有 9 个 skill 怎么协同 |
-| `graphify-out/GRAPH_REPORT.md` | 想看项目结构图（30 天内有效）|
+| cbm `get_architecture` | 想看代码结构（接了 cbm 时）|
 
 ---
 
@@ -100,7 +100,7 @@ git log --oneline -5
 # 同步 skill 到 ~/.claude/skills/（改了 skill 后一定跑）
 bash scripts/deploy.sh
 
-# 本地跑一次 graphify（30 天更新一次）
+# 看代码结构（接了 cbm）：用 get_architecture；proj-graphify 现仅管笔记图谱
 /proj-graphify
 
 # 发新 patch 版
@@ -124,9 +124,7 @@ bash scripts/deploy.sh
 
 按顺序：
 
-1. **读项目图谱报告**（如新鲜）：
-   - 检查 `graphify-out/GRAPH_REPORT.md` 存在且 < 30 天
-   - 有就读 God Nodes / Communities 三节
+1. **用 cbm 拿代码全局**（如接了 cbm；cpsk 自身未接 → 跳过本步不报错）（v0.4.0）
 2. **扫 Obsidian** 最近 tag 匹配 `cpsk` / `claude-project-survival-kit` / `CPSK` 的文档
 3. **用中文**汇报状态（含最新版本、今天做了啥、下一步候选）
 4. 问用户：选 A/B/C/D/E 哪条
