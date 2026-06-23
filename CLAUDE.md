@@ -64,6 +64,7 @@ claude-project-survival-kit/
 ├── .gitignore
 ├── .graphifyignore
 ├── docs/                        # 方法论 10 章
+│   └── superpowers/             # 设计文档(specs/) + 实施计划(plans/)，superpowers 流程产物
 ├── templates/                   # 给别人用的骨架模板
 │   ├── *.tpl                    # 7 件套 + .graphifyignore.tpl
 │   └── obsidian-docs/           # 6 个 Obsidian 模板

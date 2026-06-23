@@ -4,6 +4,31 @@
 
 ---
 
+## 📅 2026-06-23
+
+### 今天做了什么（v0.4.0 发版 + cbm 接管代码地图 + 全 8 项目推广）
+
+1. ✅ **v0.4.0 发版** — onboard/offboard 模板：项目代码地图职责从 graphify 移交给 cbm（codebase-memory-mcp）
+   - onboard 第 2 步：`GRAPH_REPORT.md` → cbm `get_architecture`（先 `list_projects` 查项目名）
+   - offboard 第 6.5 步：`graphify --update` → cbm `index_repository` 刷新
+   - 新步骤**条件触发**：未接 cbm 的项目优雅跳过、不报错（cpsk 本身就走跳过路径）
+   - graphify 退出救命手册代码扫描，专心管 Obsidian 笔记图谱（proj-graphify skill 保留，仅解绑）
+2. ✅ **完整走了一遍 superpowers 流程**：brainstorming → 设计文档（`docs/superpowers/specs/2026-06-23-cbm-takeover-code-graph-design.md`）→ writing-plans（`docs/superpowers/plans/2026-06-23-cbm-takeover-code-graph.md`）→ subagent-driven 7 任务 + 最终审查 + fix
+3. ✅ **装 cbm 0.8.1**（`--skip-config`，没碰全局配置；`settings.json` 已备份 `.bak`）
+4. ✅ **推广到全部 8 个代码项目**：cpsk·diting·infpick·kcgl·lbc·lp4·xianyu·xlyth 分身 skill 全 cbm 化（零 graphify 残留）；其中 **7 个真接线**（建项目级 `.mcp.json` + 建索引），**cpsk 只改文字不接线**（公开仓库，避免漏 /Users 路径）
+5. ✅ **cbm 现管 8 项目索引**：ytst 9078节点 / lp4 985 / inference-picker 1077 / diting 736 / lbc 595 / xianyu 359 / xlyth 148 / kcgl 139
+6. ✅ **一键回滚就绪**：`~/cbm-migration-backup-2026-06-23/rollback.sh`（数据驱动，覆盖 18 分身 skill + settings.json，"只还原不删除"）+ git tag `pre-cbm-migration`
+
+### 今天踩的坑 / 给下个 Claude 的警告
+
+1. ⚠️ **cbm 索引每进程要最多 32GB RAM**（日志 `budget_mb=32768`）→ 多项目建索引**必须串行**，并行会 OOM 撑爆 64GB
+2. ⚠️ **cbm 项目名按路径派生**（如 `Users-chenyuanhai-ytst`），不是项目简称 → `get_architecture`/`index_status` 要先 `list_projects` 查名；`index_repository` 则用 `repo_path` 路径（两类工具标识符不同，正常）
+3. ⚠️ **cbm v0.8.1 有 #557 静默删库 bug**（检测到"损坏"会删项目 DB 无恢复）→ `~/.cache/codebase-memory-mcp/` 不作唯一数据源
+4. ⚠️ **分身 skill 改完即时生效**（live change detection），但 **MCP 工具要重启窗口才接线**（开窗时才连）；老窗口收尾不用重启（offboard 走 CLI 不靠 MCP）
+5. ⚠️ **deploy.sh 故意跳过 proj-onboard/proj-offboard 模板**（给 setup-kit 用、不直接装）→ 改模板后无需 deploy；分身 skill 要直接改
+
+---
+
 ## 📅 2026-04-15
 
 ### 今天做了什么（5 次发版，1 个会话）
@@ -48,11 +73,12 @@
 
 ## 🎯 下次进来第一件事
 
-**可选路径**：
+**cbm 接管代码地图（v0.4.0）已全量落地**，8 个项目都能用了。可选下一步：
 
-- **A** — 补 5 个 GitHub Release 页面（从 CHANGELOG 抄 release notes）
-- **B** — 给另一个新项目（blog / ccr / 其他）试跑 `/setup-kit` 做真实验证
-- **C** — 写社区推广文（想推广时做）
-- **D** — 休息
+- **A** — 在 lp4 / 其它项目实战用几天 cbm，验证"省 token + 查代码"的真实体感，再决定要不要做 v0.4.1 微调
+- **B** — 给 cbm v0.8.1 的 #557 静默删库 bug 加个防护（定时备份 `~/.cache/codebase-memory-mcp/` 或盯 cbm 升级修复）
+- **C** — 补 GitHub Release notes（v0.4.0 + 之前几个 tag）
+- **D** — 把 cbm-pro 同步问题想清楚（这次没动 cpsk-pro，并行版还是老 graphify）
+- **E** — 休息
 
-**如果默认走**：建议先 D，这个 3 小时连续 5 发版的强度已经够了。
+**回滚随时可用**：`bash ~/cbm-migration-backup-2026-06-23/rollback.sh`（覆盖 18 分身 skill）。
