@@ -59,7 +59,7 @@
 
 ### Meta
 - 学习：写 skill 时「省 token」直觉不能凌驾于「不漏关键信息」之上，特别是 onboard / 复盘 这种"关键节点"
-- 已先在 ytst/lbc/cpsk 项目专用 onboard skill 同步落地
+- 已先在若干项目专用 onboard skill 同步落地（含 lbc/cpsk）
 
 ## [0.3.3] — 2026-05-05
 
@@ -70,12 +70,12 @@
 - `skills/proj-onboard/SKILL.md` 第 3 步加**强制要求**：找到 3 个 Obsidian 文件名后必须真用 Read tool 读每篇前 30 行，严禁只 ls 文件名靠会话总结瞎报；汇报明示「已 Read 3 篇（每篇 30 行）」+ 真实 frontmatter
 
 ### Why 为什么
-- 用户在另一窗口跑 `/ytst-onboard`，问"你刚才有读图谱吗"，那个 Claude 诚实承认：**只读了 GRAPH_REPORT.md 前 120 行（全文 600+ 行）+ Obsidian 文档只列了文件名没读内容**
+- 用户在另一窗口跑某个项目的 onboard skill，问"你刚才有读图谱吗"，那个 Claude 诚实承认：**只读了 GRAPH_REPORT.md 前 120 行（全文 600+ 行）+ Obsidian 文档只列了文件名没读内容**
 - 根因：旧 skill 用「读它」「读每个的 frontmatter」这种**软描述**，模型本能偷懒就钻空子
 - 新逻辑加强制语气 + 自检报告（"已 Read NN 行"自报数字让用户能验证），偷懒就被自报数字暴露
 
 ### Meta
-- 已先在三个项目专用 onboard skill 落地（`~/.claude/skills/ytst-onboard` / `lbc-onboard` / `cpsk-onboard`），验证模式后回流模板
+- 已先在三个项目专用 onboard skill 落地（cpsk-onboard / lbc-onboard / 某私有项目-onboard），验证模式后回流模板
 
 ## [0.3.2] — 2026-05-05
 
@@ -91,11 +91,11 @@
 
 ### Why 为什么
 - 旧逻辑（v0.3.0/0.3.1）：onboard 自动读图谱，但 offboard 不更新 → 图谱永远落后代码 1 个会话
-- ytst 5-05 实战发现：上次 offboard 没跑 graphify，第二天 onboard 读到的是 14 天前的图，不反映新加的 4 个实验脚本 + 决策
+- 某项目实战发现：上次 offboard 没跑 graphify，第二天 onboard 读到的是 14 天前的图，不反映新加的 4 个实验脚本 + 决策
 - 新逻辑：offboard 每次跑增量 update（30-60 秒成本可忽略），onboard 直接读现成的，永远新鲜
 
 ### Meta
-- 已先在三个项目专用 offboard skill 落地（`~/.claude/skills/ytst-offboard` / `lbc-offboard` / `cpsk-offboard`），验证逻辑可行后再回流到 cpsk 模板
+- 已先在三个项目专用 offboard skill 落地（cpsk-offboard / lbc-offboard / 某私有项目-offboard），验证逻辑可行后再回流到 cpsk 模板
 - 此版本只改 cpsk 模板源，未来用 setup-kit 创建的新项目会自带这能力
 
 ## [0.3.1] — 2026-04-15

@@ -15,14 +15,14 @@
    - graphify 退出救命手册代码扫描，专心管 Obsidian 笔记图谱（proj-graphify skill 保留，仅解绑）
 2. ✅ **完整走了一遍 superpowers 流程**：brainstorming → 设计文档（`docs/superpowers/specs/2026-06-23-cbm-takeover-code-graph-design.md`）→ writing-plans（`docs/superpowers/plans/2026-06-23-cbm-takeover-code-graph.md`）→ subagent-driven 7 任务 + 最终审查 + fix
 3. ✅ **装 cbm 0.8.1**（`--skip-config`，没碰全局配置；`settings.json` 已备份 `.bak`）
-4. ✅ **推广到全部 8 个代码项目**：cpsk·diting·infpick·kcgl·lbc·lp4·xianyu·xlyth 分身 skill 全 cbm 化（零 graphify 残留）；其中 **7 个真接线**（建项目级 `.mcp.json` + 建索引），**cpsk 只改文字不接线**（公开仓库，避免漏 /Users 路径）
-5. ✅ **cbm 现管 8 项目索引**：ytst 9078节点 / lp4 985 / inference-picker 1077 / diting 736 / lbc 595 / xianyu 359 / xlyth 148 / kcgl 139
+4. ✅ **推广到全部 8 个代码项目**（cpsk + lbc + 其余 6 个私有项目）分身 skill 全 cbm 化（零 graphify 残留）；其中 **7 个真接线**（建项目级 `.mcp.json` + 建索引），**cpsk 只改文字不接线**（公开仓库，避免漏 /Users 路径）
+5. ✅ **cbm 现管 8 项目索引**：规模从约 140 到约 9000 节点不等（lbc 595 节点；其余 7 个项目私有，不一一列名）
 6. ✅ **一键回滚就绪**：`~/cbm-migration-backup-2026-06-23/rollback.sh`（数据驱动，覆盖 18 分身 skill + settings.json，"只还原不删除"）+ git tag `pre-cbm-migration`
 
 ### 今天踩的坑 / 给下个 Claude 的警告
 
 1. ⚠️ **cbm 索引每进程要最多 32GB RAM**（日志 `budget_mb=32768`）→ 多项目建索引**必须串行**，并行会 OOM 撑爆 64GB
-2. ⚠️ **cbm 项目名按路径派生**（如 `Users-chenyuanhai-ytst`），不是项目简称 → `get_architecture`/`index_status` 要先 `list_projects` 查名；`index_repository` 则用 `repo_path` 路径（两类工具标识符不同，正常）
+2. ⚠️ **cbm 项目名按路径派生**（如 `Users-<用户名>-<项目>`），不是项目简称 → `get_architecture`/`index_status` 要先 `list_projects` 查名；`index_repository` 则用 `repo_path` 路径（两类工具标识符不同，正常）
 3. ⚠️ **cbm v0.8.1 有 #557 静默删库 bug**（检测到"损坏"会删项目 DB 无恢复）→ `~/.cache/codebase-memory-mcp/` 不作唯一数据源
 4. ⚠️ **分身 skill 改完即时生效**（live change detection），但 **MCP 工具要重启窗口才接线**（开窗时才连）；老窗口收尾不用重启（offboard 走 CLI 不靠 MCP）
 5. ⚠️ **deploy.sh 故意跳过 proj-onboard/proj-offboard 模板**（给 setup-kit 用、不直接装）→ 改模板后无需 deploy；分身 skill 要直接改
@@ -84,7 +84,7 @@
 **cbm 接管代码地图已全量落地（已到 v0.4.1，全仓一致、已分享朋友）**，8 个代码项目都能用了。可选下一步：
 
 - **A** — 清掉 `proj-graphify` skill 自述里"输出供 onboard 读取"的过时说法（onboard 已改读 cbm）；想更彻底连 `CLAUDE.md` 健康检查 + `RUNBOOK.md` §5 的 graphify 痕迹一起清
-- **B** — 在 lp4 / 其它项目实战用几天 cbm，验证"省 token + 查代码"的真实体感
+- **B** — 在某个私有项目实战用几天 cbm，验证"省 token + 查代码"的真实体感
 - **C** — 给 cbm v0.8.1 的 #557 静默删库 bug 加防护（定时备份 `~/.cache/codebase-memory-mcp/` 或盯 cbm 升级）
 - **D** — 把 cpsk-pro 同步问题想清楚（这次没动并行版，它还是老 graphify）
 - **E** — 休息

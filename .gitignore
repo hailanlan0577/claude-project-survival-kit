@@ -54,3 +54,4 @@ secrets/
 *.log
 tmp/
 temp/
+docs/superpowers/
