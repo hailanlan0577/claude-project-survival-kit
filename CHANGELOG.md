@@ -4,6 +4,15 @@
 
 ## [Unreleased]
 
+## [0.4.0] — 2026-06-23
+
+### Changed
+- onboard/offboard 模板：项目代码地图职责从 graphify 移交给 cbm（codebase-memory-mcp）
+  - onboard 第 2 步：`GRAPH_REPORT.md` → cbm `get_architecture`（含 `list_projects` 查项目名）
+  - offboard 第 6.5 步：`graphify --update` → cbm 索引刷新
+- 新步骤条件触发：未接 cbm 的项目优雅跳过、不报错
+- graphify 退出救命手册代码扫描（proj-graphify skill 保留，仅解绑）；专注 Obsidian 笔记图谱
+
 ## [0.3.5] — 2026-05-05
 
 **主题：onboard 加 umbrella 铁律——本 skill 所有文档必须 Read 完整，零例外**

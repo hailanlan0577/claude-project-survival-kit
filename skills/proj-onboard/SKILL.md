@@ -32,7 +32,7 @@ user-invocable: true
 >
 > 文档清单：
 > - `ONBOARDING.md`（第 1 步）
-> - `graphify-out/GRAPH_REPORT.md`（第 2 步）
+> - cbm 架构数据（第 2 步，如已接入）
 > - 3 篇 Obsidian 相关文档（第 3 步）
 > - `STATUS.md`（第 6 步）
 >
@@ -61,32 +61,19 @@ Read tool: <绝对路径>/ONBOARDING.md
 - 文档读取优先顺序
 - 上一次会话踩的坑
 
-### 第 2 步：读项目图谱报告（如果新鲜）（v0.3.0 新增）
+### 第 2 步：用 cbm 拿代码全局（如果项目接了 cbm，v0.4.0）
 
-如果 `<绝对路径>/graphify-out/GRAPH_REPORT.md` 存在，检查它的修改时间：
+先判断本项目是否接入 cbm（codebase-memory-mcp，代码记忆图谱）：
+- 项目根 / 全局 `.mcp.json` 含 `codebase-memory-mcp`，或能调通 cbm 工具 → 已接入
+- 否则 → **一句话跳过本步**（"本项目未接 cbm，跳过代码图谱"），不读、不报错、不卡流程
 
-```bash
-REPORT="<绝对路径>/graphify-out/GRAPH_REPORT.md"
-if [ -f "$REPORT" ]; then
-  age_days=$(( ($(date +%s) - $(stat -L -f %m "$REPORT")) / 86400 ))
-  if [ "$age_days" -lt 30 ]; then
-    echo "读图谱（$age_days 天前跑的）"
-    # 读它，把 God Nodes / Communities / Surprising Connections 三节塞进汇报
-  else
-    echo "图谱过期 $age_days 天，建议用户跑 /proj-graphify 重建"
-  fi
-fi
-```
+已接入时：
+1. 调 `list_projects` 查到本项目在 cbm 里的项目名（cbm 按路径派生，未必等于项目简称）
+2. 调 `index_status`（带上项目名）看索引是否新鲜；过期/缺失则记一句"建议下班时刷新"
+3. 调 `get_architecture`（带上项目名）拿：语言 / 包 / 入口 / 路由 / 热点 / 模块聚类
+4. 把架构概览纳入开场中文汇报的"项目地图"小节（3-5 句）
 
-- **< 30 天**：读，把项目核心抽象（10 个 God Node）+ 社区结构（Communities 小节）纳入第 4 步汇报
-- **≥ 30 天**：不读正文（过期概念可能误导），但在汇报里提示"图谱 N 天前跑的，要不要重跑一次？"
-- **文件不存在**：跳过，汇报里提一句"暂无项目图谱，想看结构可以跑 /proj-graphify"
-
-**🔴 强制要求（v0.3.3 新增，防偷懒）：**
-- 必须用 **Read tool 一次性读完整篇** GRAPH_REPORT.md（不带 offset/limit，默认 2000 行能兜住 22KB 报告）
-- 严禁用 Bash `head -120` / `sed` 等命令只读前部分应付
-- 读完**必须在汇报里明示**：「已 Read GRAPH_REPORT.md（NN 行 / NN KB）」让用户能验证你真读了
-- 汇报至少包含 4 节：**上帝节点 / 社区结构（含最弱 cohesion 警告）/ 意外连接 / 弱连接节点（孤儿）**——少一节就是没读全
+> 注：graphify 不再用于扫项目代码（已交给 cbm），它专心管 Obsidian 笔记图谱。proj-graphify skill 保留，仅不再被 onboard 自动调用。
 
 ### 第 3 步：扫 Obsidian 最近相关文档（v0.2.2 新增）
 
@@ -116,7 +103,7 @@ find "$VAULT" -name "*.md" -exec sh -c \
 
 ### 第 4 步：用中文汇报状态（3-5 句话）
 
-按以下结构（**第 2 步图谱报告 + 第 3 步 Obsidian 结果都纳入**）：
+按以下结构（**第 2 步 cbm 架构数据 + 第 3 步 Obsidian 结果都纳入**）：
 
 > 好的，我来继续 <项目名> 项目。简单汇报一下现状：
 >
@@ -126,9 +113,9 @@ find "$VAULT" -name "*.md" -exec sh -c \
 >
 > **下一步候选**：<列 A/B/C 或用户上次留的"下次第一件事">
 >
-> **（可选）项目地图**（图谱报告 N 天前跑的）：
-> - 核心抽象：<3 个 God Node>
-> - 社区结构：<X 个社区，最弱 cohesion <Y>>
+> **（可选）项目地图**（cbm 架构数据）：
+> - 语言 / 包 / 入口：<cbm get_architecture 摘要>
+> - 热点模块：<最高频访问路径>
 >
 > **（可选）Obsidian 最近相关文档** — 找到 N 份（按修改时间倒序）：
 > 1. `<标题 1>`（<日期>）— <frontmatter 摘要>
